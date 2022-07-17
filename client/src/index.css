@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
+@font-face {
+    font-family: 'Brutal';
+    src: url('./fonts/brutalFonts.woff') format('woff');
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.react-reveal {
+    width: 100%;
+}

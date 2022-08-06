@@ -15,6 +15,7 @@ module.exports = async function sendStateChangeReq(
         }
 
     } catch (err) {
+        console.error(err);
         throw new Error('Home Controller Seems offline!');
     }
 };

@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 8000;
 const socketsMap = require('./utils/sockets.map');
 
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.resolve(__dirname, './client/build')));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -30,7 +30,7 @@ app.use('/', authRoute);
 app.use('/db', dbRoute);
 
 app.get('*', (req, res) => {
-    res.status('202').sendFile('index.html');
+    res.status('202').sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 })
 
 

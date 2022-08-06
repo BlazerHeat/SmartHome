@@ -1,0 +1,1 @@
+buildnrun: cd client && npm build && cd .. && yarn run start

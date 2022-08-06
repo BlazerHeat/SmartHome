@@ -30,7 +30,7 @@ app.use('/', authRoute);
 app.use('/db', dbRoute);
 
 app.get('*', (req, res) => {
-    res.status('202').sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+    res.status(202).sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 })
 
 

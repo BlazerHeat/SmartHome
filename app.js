@@ -54,5 +54,5 @@ ws.on('connection', socket => {
 })
 
 server.listen(PORT, () => {
-    console.log(`Sevrer started on port: ${PORT}`);
+    console.log(`Server started on port: ${PORT}`);
 });

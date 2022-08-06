@@ -41,14 +41,7 @@ ws.on('connection', socket => {
     socket.on('message', msg => {
         if (msg.toString().startsWith('HOME_ID:')) {
             const id = parseInt(msg.toString().slice(8));
-            socket.ID = id;
             socketsMap.set(id, socket);
-        }
-    });
-
-    socket.on('close', () => {
-        if (socket.ID && socketsMap.has(socket.ID)) {
-            socketsMap.delete(socket.ID);
         }
     });
 })

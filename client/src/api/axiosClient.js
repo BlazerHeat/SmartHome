@@ -5,7 +5,7 @@ const getURL = () => {
 }
 
 const axiosClinet = axios.create({
-    baseURL: getURL(),
+    baseURL: 'https://smart-home-io.herokuapp.com',
     withCredentials: true,
 });
 

@@ -34,11 +34,11 @@ app.use(
 );
 
 
-if (process.env.PRODUCTION) {
-    app.get('*', (req, res) => {
-        res.status(202).sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-    });
-}
+
+app.get('*', (req, res) => {
+    res.status(202).sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
+
 
 app.use('/', authRoute);
 app.use('/db', dbRoute);

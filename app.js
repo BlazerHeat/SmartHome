@@ -26,14 +26,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 if (process.env.PRODUCTION) {
-    app.use(
-        cors({
-            origin: 'http://smart-home-io.herokuapp.com',
-            methods: ['GET', 'POST'],
-            credentials: true,
-        })
-    );
-
     app.get('*', (req, res) => {
         res.status(202).sendFile(path.resolve(__dirname, "./client/build", "index.html"));
     });

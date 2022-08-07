@@ -15,7 +15,6 @@ const { homesComponentsById } = require('./handlers/dbQueries');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-
 const server = createServer(app);
 const io = new Server(server, {
     cors: {
@@ -24,8 +23,17 @@ const io = new Server(server, {
     }
 });
 
+if (!process.env.PRODUCTION) {
+    app.use(
+        cors({
+            origin: ['http://localhost:3000'],
+            methods: ['GET', 'POST'],
+            credentials: true,
+        })
+    );
+}
 
-app.use(express.static(path.resolve('./client/build')));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -35,19 +43,16 @@ app.use('/', authRoute);
 app.use('/db', dbRoute);
 
 
+
 if (process.env.PRODUCTION) {
+    app.use(express.static(path.resolve('./client/build')));
+
     app.get('*', (req, res) => {
         res.status(202).sendFile(path.resolve("./client/build", "index.html"));
     });
-} else {
-    app.use(
-        cors({
-            origin: 'http://localhost:3000',
-            methods: ['GET', 'POST'],
-            credentials: true,
-        })
-    );
 }
+
+
 
 
 io.on('connection', (socket) => {
@@ -61,6 +66,6 @@ io.on('connection', (socket) => {
 });
 
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log(`Server started on port: ${PORT}`);
 });

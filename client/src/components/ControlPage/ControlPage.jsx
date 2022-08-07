@@ -22,6 +22,7 @@ function ControlPage({ selectedHomeId, componentsData, setComponentsData }) {
     };
     const handleClick = (component_name, state, setState) => {
         const id = toast.loading('Updating state...', deafultToastConfig);
+
         axiosClinet
             .post('/db/changestate', {
                 home_id: selectedHomeId,
@@ -55,6 +56,7 @@ function ControlPage({ selectedHomeId, componentsData, setComponentsData }) {
                     render: message,
                     type: 'error',
                     isLoading: false,
+                    position: 'top-left',
                 });
             });
     };

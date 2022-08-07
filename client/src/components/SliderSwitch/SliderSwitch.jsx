@@ -24,7 +24,7 @@ const Switch = styled.label`
         bottom: 0;
         background-color: #ccc;
         -webkit-transition: 0.4s;
-        transition: 0.4s;
+        transition: all 0.4s;
 
         ::before {
             position: absolute;
@@ -35,7 +35,7 @@ const Switch = styled.label`
             bottom: 4px;
             background-color: white;
             -webkit-transition: 0.4s;
-            transition: 0.4s;
+            transition: all 0.4s;
         }
     }
 

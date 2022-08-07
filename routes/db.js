@@ -8,7 +8,7 @@ router.get('/userhomes/:useremail', async (req, res) => {
 
     try {
         const cardData = await dbHandler.homesData(useremail);
-        const componentsData = await dbHandler.homesComponents(useremail);
+        const componentsData = await dbHandler.homesComponentsByEmail(useremail);
 
         return res.status(202).json({
             cardData,
@@ -23,7 +23,7 @@ router.post('/changestate', async (req, res) => {
     const { home_id, component_name, state } = req.body;
 
     try {
-        const response = await sendStateChangeReq(
+        await sendStateChangeReq(
             home_id,
             component_name,
             state

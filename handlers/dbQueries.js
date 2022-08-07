@@ -12,10 +12,18 @@ module.exports = {
         return data.rows;
     },
 
-    homesComponents: async (userEmail) => {
+    homesComponentsByEmail: async (userEmail) => {
         const data = await db.query(
             `SELECT * FROM home_components WHERE home_id IN (SELECT home_id FROM ruh WHERE email=$1)`,
             [userEmail]
+        );
+        return data.rows;
+    },
+
+    homesComponentsById: async (homeId) => {
+        const data = await db.query(
+            `SELECT * FROM home_components WHERE home_id = $1`,
+            [homeId]
         );
         return data.rows;
     },

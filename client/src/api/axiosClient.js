@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-const URL = process.env.PRODUCTION ? 'http://localhost:8000' : 'https://smart-home-io.herokuapp.com';
+const getURL = () => {
+    return process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://smart-home-io.herokuapp.com';
+}
 
 const axiosClinet = axios.create({
-    baseURL: 'https://smart-home-io.herokuapp.com',
+    baseURL: getURL(),
     withCredentials: true,
 });
 

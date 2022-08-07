@@ -20,28 +20,29 @@ const server = createServer(app);
 const io = new Server(server);
 
 
-app.use(express.static(path.resolve(__dirname, './client/build')));
+app.use(express.static(path.resolve('./client/build')));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-    cors({
-        origin: '*',
-        methods: ['GET', 'POST'],
-        credentials: true,
-    })
-);
-
-
-
-app.get('*', (req, res) => {
-    res.status(202).sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-});
-
 
 app.use('/', authRoute);
 app.use('/db', dbRoute);
+
+
+if (process.env.PRODUCTION) {
+    app.get('*', (req, res) => {
+        res.status(202).sendFile(path.resolve("./client/build", "index.html"));
+    });
+} else {
+    app.use(
+        cors({
+            origin: 'http://localhost:3000',
+            methods: ['GET', 'POST'],
+            credentials: true,
+        })
+    );
+}
 
 
 io.on('connection', (socket) => {

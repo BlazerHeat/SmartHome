@@ -31,7 +31,6 @@
             "react-app/jest"
         ]
     },
-    "proxy": "https://smart-home-io.herokuapp.com",
     "browserslist": {
         "production": [
             ">0.2%",

@@ -21,16 +21,24 @@ router.get('/userhomes/:useremail', async (req, res) => {
 
 router.post('/changestate', async (req, res) => {
     const { home_id, component_name, state } = req.body;
-
+    req.stateChanged = false;
     try {
         await sendStateChangeReq(
             home_id,
             component_name,
             state
         );
+        req.stateChanged = true;
         await dbHandler.changeState(home_id, component_name, state);
         return res.status(202).send({ message: 'State Updated!' });
     } catch (err) {
+        if (req.stateChanged) {
+            await sendStateChangeReq(
+                home_id,
+                component_name,
+                !state
+            );
+        }
         return res.status(500).json({ error: err.message });
     }
 });

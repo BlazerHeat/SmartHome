@@ -4,8 +4,8 @@ import styled from 'styled-components';
 const Switch = styled.label`
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 37px;
+    height: 21px;
 
     user-select: none;
 
@@ -29,10 +29,10 @@ const Switch = styled.label`
         ::before {
             position: absolute;
             content: '';
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
+            height: 15px;
+            width: 15px;
+            left: 3px;
+            bottom: 3px;
             background-color: white;
             -webkit-transition: 0.4s;
             transition: all 0.4s;
@@ -47,13 +47,11 @@ const Switch = styled.label`
     }
 
     input:checked + .slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
+        transform: translateX(15px);
     }
 
     .slider.round {
-        border-radius: 34px;
+        border-radius: 10px;
     }
 
     .slider.round:before {

@@ -8,6 +8,20 @@ const Container = styled.div`
     color: black;
     width: 100%;
     background-color: white;
+
+    @media screen and (max-width: 720px) {
+
+        margin: 0;
+        position: absolute;
+        
+        margin-top: 10px;
+        width: calc(100% - 10px);
+
+        left: 50%;
+        transform: translateX(-50%);
+
+        /* display: none; */
+    }
 `;
 
 const Heading = styled.h4`

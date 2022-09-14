@@ -3,11 +3,30 @@ import { axiosClinet } from '../../api/axiosClient';
 import { ControlPage, HomeCard } from '../../components';
 import UserContext from '../../utils/UserContext';
 import { CardsList, Main, Container } from './MyHomesPage.styled';
+import Modal from 'react-modal';
+
+const customStyles = {
+    content: {
+        top: 100,
+    },
+};
+
 function MyHomesPage() {
     const { user } = useContext(UserContext);
     const [cardData, setCardData] = useState([]);
     const [componentsData, setComponentsData] = useState([]);
     const [selectedHomeId, setSelectedHomeId] = useState(1);
+
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    function openModal() {
+        setIsOpen(true);
+      }
+    
+    
+      function closeModal() {
+        setIsOpen(false);
+      }
 
     useEffect(
         () => {
@@ -36,19 +55,31 @@ function MyHomesPage() {
                                 <HomeCard
                                     {...home}
                                     setSelectedHomeId={setSelectedHomeId}
+                                    openModal={openModal}
                                 />
                             </li>
                         );
                     })}
                 </CardsList>
                 {componentsData.length > 0 && (
-                    <ControlPage
+
+                    window.innerWidth > 720 ? <ControlPage
                         {...{
                             selectedHomeId,
                             componentsData,
                             setComponentsData,
                         }}
-                    />
+                    /> :
+                        <Modal isOpen={modalIsOpen} style={customStyles}>
+                            <button onClick={closeModal}>Close Panel</button>
+                            <ControlPage
+                                {...{
+                                    selectedHomeId,
+                                    componentsData,
+                                    setComponentsData,
+                                }}
+                            />
+                        </Modal>
                 )}
             </Container>
         </Main>

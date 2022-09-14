@@ -2,9 +2,10 @@ import React from 'react';
 import { HomeCardDiv } from './HomeCard.styled';
 import { AiOutlineArrowRight, AiOutlineHome } from 'react-icons/ai';
 
-function HomeCard({ home_name, total_components, home_id, setSelectedHomeId }) {
+function HomeCard({ home_name, total_components, home_id, setSelectedHomeId, openModal }) {
     const handleClick = () => {
         setSelectedHomeId(home_id);
+        openModal();
     };
     return (
         <HomeCardDiv>

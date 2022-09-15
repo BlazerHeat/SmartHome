@@ -26,3 +26,5 @@ yarn-debug.log*
 yarn-error.log*
 
 test.html
+
+client/build

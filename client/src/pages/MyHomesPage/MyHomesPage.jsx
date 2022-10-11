@@ -16,17 +16,17 @@ function MyHomesPage() {
     const [cardData, setCardData] = useState([]);
     const [componentsData, setComponentsData] = useState([]);
     const [selectedHomeId, setSelectedHomeId] = useState(1);
+    const [controllerStatus, setControllerStatus] = useState('offline');
 
     const [modalIsOpen, setIsOpen] = useState(false);
 
     function openModal() {
         setIsOpen(true);
-      }
-    
-    
-      function closeModal() {
+    }
+
+    function closeModal() {
         setIsOpen(false);
-      }
+    }
 
     useEffect(
         () => {
@@ -43,6 +43,18 @@ function MyHomesPage() {
         // eslint-disable-next-line
         []
     );
+
+    useEffect(() => {
+        axiosClinet
+            .get(`/controllerstatus/${selectedHomeId}`)
+            .then((res) => {
+                console.log(res);
+                setControllerStatus(res.data);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }, [selectedHomeId]);
 
     return (
         <Main bgimg="/images/bg2.jpeg">
@@ -61,15 +73,17 @@ function MyHomesPage() {
                         );
                     })}
                 </CardsList>
-                {componentsData.length > 0 && (
-
-                    window.innerWidth > 720 ? <ControlPage
-                        {...{
-                            selectedHomeId,
-                            componentsData,
-                            setComponentsData,
-                        }}
-                    /> :
+                {componentsData.length > 0 &&
+                    (window.innerWidth > 720 ? (
+                        <ControlPage
+                            {...{
+                                selectedHomeId,
+                                componentsData,
+                                setComponentsData,
+                                controllerStatus,
+                            }}
+                        />
+                    ) : (
                         <Modal isOpen={modalIsOpen} style={customStyles}>
                             <button onClick={closeModal}>Close Panel</button>
                             <ControlPage
@@ -77,10 +91,11 @@ function MyHomesPage() {
                                     selectedHomeId,
                                     componentsData,
                                     setComponentsData,
+                                    controllerStatus,
                                 }}
                             />
                         </Modal>
-                )}
+                    ))}
             </Container>
         </Main>
     );

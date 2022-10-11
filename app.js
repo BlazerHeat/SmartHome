@@ -41,7 +41,16 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/', authRoute);
 app.use('/db', dbRoute);
+app.get('/controllerstatus/:homeid', (req, res) => {
+    const { homeid } = req.params;
 
+    if (socketMap.has(parseInt(homeid))) {
+        res.status(202).send('Online!');
+    } else {
+        res.status(202).send('Offline!');
+    }
+
+})
 
 
 if (process.env.PRODUCTION) {

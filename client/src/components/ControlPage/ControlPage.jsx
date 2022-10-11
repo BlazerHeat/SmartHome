@@ -10,7 +10,12 @@ import { axiosClinet } from '../../api/axiosClient';
 import { toast } from 'react-toastify';
 import deafultToastConfig from '../../defaultToastConfig.json';
 
-function ControlPage({ selectedHomeId, componentsData, setComponentsData }) {
+function ControlPage({
+    selectedHomeId,
+    componentsData,
+    setComponentsData,
+    controllerStatus,
+}) {
     const formatComponentName = (name) => {
         const words = name.split(' ');
 
@@ -63,7 +68,10 @@ function ControlPage({ selectedHomeId, componentsData, setComponentsData }) {
 
     return (
         <Container>
-            <Heading>Home ID: {selectedHomeId}</Heading>
+            <Heading>
+                Home ID: {selectedHomeId} | Controller Status:{' '}
+                {controllerStatus}
+            </Heading>
             <ComponentsContainer>
                 {componentsData
                     .filter((x) => x.home_id === selectedHomeId)

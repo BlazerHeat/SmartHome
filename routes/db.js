@@ -39,8 +39,6 @@ router.post('/changestate', async (req, res) => {
                 !state
             );
         }
-
-        console.log(err);
         return res.status(500).json({ error: err.message });
     }
 });
